@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outils Utilitaires</title>
+    <!-- Chargement de Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4b6cb7">
+<link rel="apple-touch-icon" href="icon.png"></head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center py-10">
+
+    <h1 class="text-3xl font-bold text-gray-800 mb-10 text-center">Boîte à Outils</h1>
+
+    <div class="flex flex-col md:flex-row gap-8 px-4 w-full max-w-5xl justify-center items-start">
+        
+        <!-- ================= CALCULATRICE ================= -->
+        <div class="bg-gray-900 rounded-2xl shadow-2xl p-6 w-full max-w-xs mx-auto">
+            <h2 class="text-gray-300 text-sm font-semibold mb-4 uppercase tracking-wider">Calculatrice</h2>
+            
+            <input type="text" id="calc-display" disabled 
+                   class="w-full bg-gray-800 text-white text-right text-3xl p-4 rounded-xl mb-4 border border-gray-700 outline-none" placeholder="0">
+
+            <div class="grid grid-cols-4 gap-3">
+                <button onclick="clearCalc()" class="col-span-3 bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-lg transition-colors">C</button>
+                <button onclick="appendCalc('/')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors">÷</button>
+
+                <button onclick="appendCalc('7')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">7</button>
+                <button onclick="appendCalc('8')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">8</button>
+                <button onclick="appendCalc('9')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">9</button>
+                <button onclick="appendCalc('*')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors">×</button>
+
+                <button onclick="appendCalc('4')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">4</button>
+                <button onclick="appendCalc('5')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">5</button>
+                <button onclick="appendCalc('6')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">6</button>
+                <button onclick="appendCalc('-')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors">-</button>
+
+                <button onclick="appendCalc('1')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">1</button>
+                <button onclick="appendCalc('2')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">2</button>
+                <button onclick="appendCalc('3')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">3</button>
+                <button onclick="appendCalc('+')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg transition-colors">+</button>
+
+                <button onclick="appendCalc('0')" class="col-span-2 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">0</button>
+                <button onclick="appendCalc('.')" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 rounded-lg transition-colors">.</button>
+                <button onclick="calculate()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition-colors">=</button>
+            </div>
+        </div>
+
+        <!-- ================= CONVERTISSEUR DE MONNAIE ================= -->
+        <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm mx-auto border border-gray-200">
+            <h2 class="text-gray-500 text-sm font-semibold mb-4 uppercase tracking-wider">Convertisseur de devises</h2>
+            
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Montant</label>
+                <input type="number" id="amount" class="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3 outline-none" placeholder="0.00">
+            </div>
+
+            <div class="flex gap-4 mb-6">
+                <div class="w-1/2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">De</label>
+                    <select id="from-currency" class="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3 outline-none">
+                        <option value="EUR">🇪🇺 EUR</option>
+                        <option value="USD">🇺🇸 USD</option>
+                        <option value="DZD" selected>🇩🇿 DZD</option>
+                        <option value="GBP">🇬🇧 GBP</option>
+                        <option value="CAD">🇨🇦 CAD</option>
+                    </select>
+                </div>
+                
+                <div class="flex items-end justify-center pb-3 text-gray-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                </div>
+
+                <div class="w-1/2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">À</label>
+                    <select id="to-currency" class="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-3 outline-none">
+                        <option value="EUR" selected>🇪🇺 EUR</option>
+                        <option value="USD">🇺🇸 USD</option>
+                        <option value="DZD">🇩🇿 DZD</option>
+                        <option value="GBP">🇬🇧 GBP</option>
+                        <option value="CAD">🇨🇦 CAD</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="convertCurrency()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors mb-4">
+                Convertir
+            </button>
+
+            <div class="bg-blue-50 p-4 rounded-lg text-center border border-blue-100">
+                <p class="text-sm text-gray-500 mb-1">Résultat :</p>
+                <p id="convert-result" class="text-2xl font-bold text-blue-700">0.00</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        // --- LOGIQUE DE LA CALCULATRICE ---
+        const display = document.getElementById('calc-display');
+
+        function appendCalc(value) {
+            if (display.value === 'Erreur') display.value = '';
+            display.value += value;
+        }
+
+        function clearCalc() {
+            display.value = '';
+        }
+
+        function calculate() {
+            try {
+                // Utilisation de eval (sécurisé ici car l'input est contrôlé par les boutons)
+                if (display.value.trim() !== '') {
+                    display.value = eval(display.value);
+                }
+            } catch (error) {
+                display.value = 'Erreur';
+            }
+        }
+
+        // --- LOGIQUE DU CONVERTISSEUR ---
+        // Taux de change fictifs basés sur l'USD (pour la démo)
+        const exchangeRates = {
+            USD: 1,
+            EUR: 0.92,
+            GBP: 0.79,
+            CAD: 1.35,
+            DZD: 134.50 // Dinar algérien
+        };
+
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const from = document.getElementById('from-currency').value;
+            const to = document.getElementById('to-currency').value;
+            const resultDisplay = document.getElementById('convert-result');
+
+            if (isNaN(amount) || amount <= 0) {
+                resultDisplay.innerText = "Entrez un montant";
+                return;
+            }
+
+            // Conversion : Devises source -> USD -> Devises cible
+            const amountInUSD = amount / exchangeRates[from];
+            const finalAmount = amountInUSD * exchangeRates[to];
+
+            // Affichage avec 2 décimales
+            resultDisplay.innerText = finalAmount.toFixed(2) + ' ' + to;
+        }
+    </script>
+
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));}</script>
+</body>
+</html>
